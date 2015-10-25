@@ -1,0 +1,6 @@
+
+Photos:
+  1. Build out the activity xml (x)
+  2. Model of the resource (Photo)
+  3. Send out a network request to API
+  4. Decode the response and load it into a model (Photo)
