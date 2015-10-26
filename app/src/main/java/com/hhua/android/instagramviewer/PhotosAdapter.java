@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import org.ocpsoft.prettytime.PrettyTime;
+
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,16 +37,26 @@ public class PhotosAdapter extends ArrayAdapter<Photo> {
         }
 
         // Look up the views for populating the data
+        TextView tvUsername = (TextView) convertView.findViewById(R.id.tvUsername);
+        TextView tvCreatedTime = (TextView) convertView.findViewById(R.id.tvCreatedTime);
         TextView tvCaption = (TextView) convertView.findViewById(R.id.tvCaption);
+        TextView tvLikesCount = (TextView) convertView.findViewById(R.id.tvLikeCounts);
         ImageView ivPhoto = (ImageView) convertView.findViewById(R.id.ivPhoto);
+        ImageView ivProfile = (ImageView) convertView.findViewById(R.id.ivProfile);
 
         // Insert the model data into each view items
+        tvUsername.setText(photo.username);
         tvCaption.setText(photo.caption);
+        PrettyTime prettyTime = new PrettyTime();
+        tvCreatedTime.setText(prettyTime.format(new Date(System.currentTimeMillis() - photo.createdTime)));
+        tvLikesCount.setText(photo.likesCount + " likes");
 
-        // Clear out the imageview
+        // Clear out the image view
         ivPhoto.setImageDrawable(null);
+        ivProfile.setImageDrawable(null);
 
         // Insert the image view with Picasso
+        Picasso.with(getContext()).load(photo.profilePictureUrl).into(ivProfile);
         Picasso.with(getContext()).load(photo.imageUrl).into(ivPhoto);
 
         // Return the created item as a view

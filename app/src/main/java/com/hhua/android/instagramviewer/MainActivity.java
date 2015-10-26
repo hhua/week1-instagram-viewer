@@ -10,6 +10,7 @@ import android.widget.ListView;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestHandle;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -52,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         // Create Network client
         AsyncHttpClient client = new AsyncHttpClient();
         // Send the network request
-        client.get(url, null, new JsonHttpResponseHandler(){
+        RequestHandle requestHandle = client.get(url, null, new JsonHttpResponseHandler() {
             // onSuccess (worked, 200)
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -61,21 +63,28 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("DEBUG", response.toString());
 
                 JSONArray photosJSON = null;
-                try{
+                try {
                     photosJSON = response.getJSONArray("data");
 
-                    for (int i = 0; i < photosJSON.length(); i++){
+                    for (int i = 0; i < photosJSON.length(); i++) {
                         JSONObject photoJSON = photosJSON.getJSONObject(i);
 
                         Photo photo = new Photo();
                         photo.username = photoJSON.getJSONObject("user").getString("username");
-                        photo.caption = photoJSON.getJSONObject("caption").getString("text");
+                        photo.profilePictureUrl = photoJSON.getJSONObject("user").getString("profile_picture");
+                        if (photoJSON.isNull("caption")) {
+                            photo.caption = "";
+                        }else{
+                            photo.caption = photoJSON.getJSONObject("caption").getString("text");
+                        }
                         photo.imageUrl = photoJSON.getJSONObject("images").getJSONObject("standard_resolution").getString("url");
                         photo.imageHeight = photoJSON.getJSONObject("images").getJSONObject("standard_resolution").getInt("height");
                         photo.likesCount = photoJSON.getJSONObject("likes").getInt("count");
+                        photo.createdTime = Long.parseLong(photoJSON.getString("created_time"), 10);
+
                         photos.add(photo);
                     }
-                }catch (JSONException ex){
+                } catch (JSONException ex) {
                     ex.printStackTrace();
                 }
 
