@@ -1,6 +1,7 @@
 package com.hhua.android.instagramviewer;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,7 +9,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import org.ocpsoft.prettytime.PrettyTime;
 
@@ -56,7 +59,13 @@ public class PhotosAdapter extends ArrayAdapter<Photo> {
         ivProfile.setImageDrawable(null);
 
         // Insert the image view with Picasso
-        Picasso.with(getContext()).load(photo.profilePictureUrl).into(ivProfile);
+        Transformation transformation = new RoundedTransformationBuilder()
+                .borderColor(Color.BLACK)
+                .borderWidthDp(0)
+                .cornerRadiusDp(50)
+                .oval(false)
+                .build();
+        Picasso.with(getContext()).load(photo.profilePictureUrl).fit().transform(transformation).into(ivProfile);
         Picasso.with(getContext()).load(photo.imageUrl).into(ivPhoto);
 
         // Return the created item as a view

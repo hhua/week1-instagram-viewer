@@ -29,4 +29,5 @@ dependencies {
     // Load remote images from network to views
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'org.ocpsoft.prettytime:prettytime:4.0.0.Final'
+    compile 'com.makeramen:roundedimageview:2.2.1'
 }

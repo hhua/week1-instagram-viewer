@@ -15,7 +15,7 @@ This is an application for displaying popular photos on Instagram using the [Ins
  * [x] For each photo displayed, user can see relative timestamp, like count, user profile image
  * [ ] Add pull-to-refresh for popular stream with [SwipeRefreshLayout](http://guides.codepath.com/android/Implementing-Pull-to-Refresh-Guide)
  * [ ] Show latest comment for each photo (bonus: show last 2 comments)
- * [ ] Display each user profile image using a [RoundedImageView](https://github.com/vinc3m1/RoundedImageView)
+ * [x] Display each user profile image using a [RoundedImageView](https://github.com/vinc3m1/RoundedImageView)
  * [ ] Display a nice default placeholder graphic for each image during loading (read more about Picasso)
  * [ ] Improve the [user interface](http://guides.codepath.com/android/Styling-UI-Screens-FAQ#actionbar) through styling and coloring
  * [ ] Allow user to view all comments for an image within a separate activity or [dialog fragment](http://guides.codepath.com/android/Using-DialogFragment)
@@ -24,6 +24,7 @@ This is an application for displaying popular photos on Instagram using the [Ins
 ## Notes:
 
  1. Need to handle `null` cases in JSON parsing.
+ 2. Used [PrettyTime](http://www.ocpsoft.org/prettytime/) to format the timestamp
 
 ## Walkthrough of all user stories:
 
