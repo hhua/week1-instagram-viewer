@@ -28,7 +28,7 @@ This is an application for displaying popular photos on Instagram using the [Ins
 
 ## Walkthrough of all user stories:
 
-![Video Walkthrough]()
+![Video Walkthrough](https://github.com/hhua/week1-instagram-viewer/blob/master/docs/instagram_viewer.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
